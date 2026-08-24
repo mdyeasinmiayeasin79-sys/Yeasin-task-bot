@@ -1,1 +1,223 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yeasin Task - Earnings & Captcha</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
+    body {
+      background-color: #f4f7f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      padding: 25px;
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 90px;
+      height: 90px;
+      background: #007bb5;
+      border-radius: 50%;
+      margin: 0 auto 10px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 45px;
+      position: relative;
+      border: 3px solid #e0e0e0;
+    }
+
+    .verified-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: #4caf50;
+      color: white;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+
+    .user-name {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .user-location {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .stats-box {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 10px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      font-size: 0.9rem;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .captcha-box {
+      background: #fff8e1;
+      border: 1px dashed #ffe082;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 12px;
+      color: #b78103;
+      margin-bottom: 15px;
+      user-select: none;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      outline: none;
+      text-align: center;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .btn-submit {
+      background-color: #0088cc;
+      color: white;
+    }
+
+    .btn-withdraw {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .btn-telegram {
+      background-color: #0088cc;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    
+    <!-- Profile -->
+    <div class="profile-img">
+      👑
+      <div class="verified-badge">✓</div>
+    </div>
+    <div class="user-name">Dear Yeasin Mia</div>
+    <div class="user-location">Location - Bangladesh 🇧🇩</div>
+
+    <!-- Stats -->
+    <div class="stats-box">
+      <div>💰 Total: <strong id="total-bdt">20</strong> BDT</div>
+      <div>✅ Correct: <strong id="correct-count">10</strong></div>
+      <div>❌ Wrong: <strong id="wrong-count">0</strong></div>
+      <div>🎯 Success Rate: <strong id="success-rate">100%</strong></div>
+    </div>
+
+    <!-- Captcha -->
+    <div class="captcha-box" id="captcha-code">76152</div>
+    <input type="text" id="captcha-input" class="input-field" placeholder="Type the captcha text">
+
+    <!-- Actions -->
+    <button class="btn btn-submit" onclick="validateCaptcha()">Submit</button>
+    <button class="btn btn-withdraw" onclick="alert('Withdraw feature coming soon!')">Withdraw (বিকাশ / নগদ)</button>
+    
+    <!-- Telegram Join Link -->
+    <a href="https://t.me/MDyeasinMia636" target="_blank" class="btn btn-telegram">
+      📢 Join Telegram Channel
+    </a>
+
+  </div>
+
+  <script>
+    let currentCaptcha = "76152";
+    let totalBdt = 20;
+    let correctCount = 10;
+    let wrongCount = 0;
+
+    function generateCaptcha() {
+      currentCaptcha = Math.floor(10000 + Math.random() * 90000).toString();
+      document.getElementById("captcha-code").innerText = currentCaptcha;
+    }
+
+    function validateCaptcha() {
+      const userInput = document.getElementById("captcha-input").value.trim();
+      
+      if (userInput === currentCaptcha) {
+        correctCount++;
+        totalBdt += 2; // Per correct captcha 2 BDT
+        alert("সঠিক হয়েছে! আপনি ২ টাকা পেয়েছেন।");
+      } else {
+        wrongCount++;
+        alert("ভুল হয়েছে! আবার চেষ্টা করুন।");
+      }
+
+      // Update Dashboard
+      document.getElementById("total-bdt").innerText = totalBdt;
+      document.getElementById("correct-count").innerText = correctCount;
+      document.getElementById("wrong-count").innerText = wrongCount;
+      
+      const totalAttempt = correctCount + wrongCount;
+      const rate = Math.round((correctCount / totalAttempt) * 100);
+      document.getElementById("success-rate").innerText = rate + "%";
+
+      // Reset Input and generate new Captcha
+      document.getElementById("captcha-input").value = "";
+      generateCaptcha();
+    }
+  </script>
+
+</body>
+</html>
