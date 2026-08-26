@@ -1,1 +1,91 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মাই ডাইনামিক ওয়েবসাইট</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #1a1a2e;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #16213e;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .balance-card {
+            background: #0f3460;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: #e94560;
+        }
+        .image-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .btn {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            background: #c0354e;
+        }
+    </style>
+</head>
+<body>
 
+    <div class="container">
+        <div class="balance-card">
+            ব্যালেন্স: <span id="balance">৳ 0.00</span>
+        </div>
+
+        <div class="image-box">
+            <img id="display-image" src="https://picsum.photos/300/200?random=1" alt="Image">
+        </div>
+
+        <button class="btn" onclick="nextImage()">পরবর্তী ছবি দেখুন</button>
+    </div>
+
+    <script>
+        let currentBalance = 0;
+
+        function nextImage() {
+            // ব্যালেন্স বাড়ানো
+            currentBalance += 10.50;
+            document.getElementById('balance').innerText = '৳ ' + currentBalance.toFixed(2);
+
+            // নতুন ছবি লোড করা
+            let randomNumber = Math.floor(Math.random() * 1000);
+            document.getElementById('display-image').src = 'https://picsum.photos/300/200?random=' + randomNumber;
+        }
+    </script>
+
+</body>
+</html>
