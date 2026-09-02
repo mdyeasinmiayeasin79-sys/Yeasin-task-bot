@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>শিশুদের কোর্স - বিকাশ পেমেন্ট</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f6f9; }
+    .card { background: white; border-radius: 10px; padding: 30px; max-width: 350px; margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h2 { color: #006a4e; }
+    .price { font-size: 20px; font-weight: bold; margin: 15px 0; color: #333; }
+    .bkash-btn { background-color: #E2136E; color: white; border: none; padding: 12px 25px; font-size: 16px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
+    .bkash-btn:hover { background-color: #c00f5c; }
+  </style>
+</head>
+<body>
 
+<div class="card">
+  <h2>শিশুদের ডিজিটাল শিখন কোর্স</h2>
+  <p>সম্পূর্ণ কোর্স অ্যাক্সেস পেতে নিচের বাটনে ক্লিক করুন</p>
+  <div class="price">ফি: ১০০ টাকা</div>
+  
+  <!-- ক্লিক করলে ২ নম্বর কোডটি ৩ নম্বর ফাইল (create-payment.php) কে কল করবে -->
+  <form action="create-payment.php" method="POST">
+    <button type="submit" class="bkash-btn">bKash দিয়ে পেমেন্ট করুন</button>
+  </form>
+</div>
+
+</body>
+</html>
