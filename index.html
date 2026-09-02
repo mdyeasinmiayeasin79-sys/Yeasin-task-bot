@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>শিশুদের কোর্স - বিকাশ পেমেন্ট</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f6f9; }
+    .card { background: white; border-radius: 12px; padding: 25px; max-width: 380px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    h2 { color: #006a4e; margin-bottom: 5px; }
+    .price { font-size: 20px; font-weight: bold; margin: 15px 0; color: #E2136E; }
+    .bkash-box { background: #ffe6f0; border: 1px dashed #E2136E; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: left; }
+    .bkash-box p { margin: 5px 0; font-size: 14px; }
+    .num { font-weight: bold; color: #E2136E; font-size: 16px; }
+    input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; }
+    button { background-color: #E2136E; color: white; border: none; padding: 12px; font-size: 16px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
+    button:hover { background-color: #c00f5c; }
+    #msg { margin-top: 15px; font-weight: bold; color: green; display: none; }
+  </style>
+</head>
+<body>
 
+<div class="card">
+  <h2>শিশুদের ডিজিটাল শিখন কোর্স</h2>
+  <p>সম্পূর্ণ কোর্স অ্যাক্সেস পেতে পেমেন্ট করুন</p>
+  <div class="price">ফি: ১০০ টাকা</div>
+
+  <div class="bkash-box">
+    <p><b>পেমেন্ট নিয়মাবলী:</b></p>
+    <p>১. আপনার বিকাশ অ্যাপ থেকে <b>Send Money</b> করুন।</p>
+    <p>২. বিকাশ নম্বর: <span class="num">01XXXXXXXXX</span> (আপনার নাম্বার)</p>
+    <p>৩. নিচে আপনার ট্রানজেকশন আইডি (TrxID) দিয়ে সাবমিট করুন।</p>
+  </div>
+
+  <form id="paymentForm">
+    <input type="text" placeholder="আপনার বিকাশ নম্বর" required><br>
+    <input type="text" placeholder="TrxID (ট্রানজেকশন আইডি)" required><br>
+    <button type="submit">পেমেন্ট নিশ্চিত করুন</button>
+  </form>
+
+  <div id="msg">✅ আপনার তথ্য গ্রহণ করা হয়েছে! ভেরিফাই করে দ্রুত এক্সেস দেওয়া হবে।</div>
+</div>
+
+<script>
+  document.getElementById('paymentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('msg').style.display = 'block';
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
