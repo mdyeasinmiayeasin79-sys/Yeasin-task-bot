@@ -1,1 +1,196 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>CAPTCHA Verification</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f2f4f8;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.captcha-box{
+    width:100%;
+    max-width:420px;
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
+    text-align:center;
+}
+
+h2{
+    margin-bottom:20px;
+}
+
+.captcha-row{
+    display:flex;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+#captcha{
+    flex:1;
+    background:#eee;
+    border:2px dashed #777;
+    border-radius:10px;
+    padding:14px 8px;
+    font-size:20px;
+    font-weight:bold;
+    letter-spacing:3px;
+    user-select:all;
+}
+
+button{
+    border:none;
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.copy-btn{
+    background:#0759c9;
+    color:white;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:2px solid #ddd;
+    border-radius:10px;
+    font-size:17px;
+    margin-bottom:12px;
+    outline:none;
+}
+
+.verify-btn{
+    width:100%;
+    background:#159447;
+    color:white;
+}
+
+.refresh-btn{
+    margin-top:10px;
+    background:#555;
+    color:white;
+}
+
+#message{
+    margin-top:15px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="captcha-box">
+
+    <h2>CAPTCHA Verification</h2>
+
+    <div class="captcha-row">
+        <div id="captcha"></div>
+        <button class="copy-btn" onclick="copyCaptcha()">Copy</button>
+    </div>
+
+    <input
+        type="text"
+        id="captchaInput"
+        placeholder="CAPTCHA এখানে লিখুন বা Paste করুন"
+        autocomplete="off"
+    >
+
+    <button class="verify-btn" onclick="verifyCaptcha()">
+        Verify
+    </button>
+
+    <button class="refresh-btn" onclick="generateCaptcha()">
+        🔄 নতুন CAPTCHA
+    </button>
+
+    <div id="message"></div>
+
+</div>
+
+<script>
+
+let captchaCode = "";
+
+function generateCaptcha(){
+
+    const characters =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    captchaCode = "";
+
+    for(let i = 0; i < 8; i++){
+        captchaCode += characters.charAt(
+            Math.floor(Math.random() * characters.length)
+        );
+    }
+
+    document.getElementById("captcha").textContent =
+        captchaCode;
+
+    document.getElementById("captchaInput").value = "";
+
+    document.getElementById("message").textContent = "";
+}
+
+function copyCaptcha(){
+
+    navigator.clipboard.writeText(captchaCode)
+    .then(function(){
+
+        document.getElementById("message").textContent =
+            "✅ CAPTCHA কপি হয়েছে। এখন নিচে Paste করুন।";
+
+    })
+    .catch(function(){
+
+        document.getElementById("message").textContent =
+            "CAPTCHA কপি করতে পারেননি। কোডটি দেখে লিখুন।";
+
+    });
+}
+
+function verifyCaptcha(){
+
+    const userCode =
+        document.getElementById("captchaInput").value.trim();
+
+    if(userCode === captchaCode){
+
+        document.getElementById("message").textContent =
+            "✅ CAPTCHA সঠিক!";
+
+    }else{
+
+        document.getElementById("message").textContent =
+            "❌ CAPTCHA ভুল। আবার চেষ্টা করুন।";
+
+    }
+}
+
+generateCaptcha();
+
+</script>
+
+</body>
+</html>
